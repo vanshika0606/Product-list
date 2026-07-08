@@ -1,14 +1,25 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 function ImageCarousel({ images, alt }) {
   const [index, setIndex] = useState(0)
+
+  useEffect(() => {
+    images?.forEach((src) => {
+      const preload = new Image()
+      preload.src = src
+    })
+  }, [images])
 
   if (!images || images.length === 0) return null
 
   const hasMultiple = images.length > 1
 
-  function goTo(nextIndex) {
-    setIndex((nextIndex + images.length) % images.length)
+  function showPrevious() {
+    setIndex((current) => (current - 1 + images.length) % images.length)
+  }
+
+  function showNext() {
+    setIndex((current) => (current + 1) % images.length)
   }
 
   return (
@@ -18,7 +29,7 @@ function ImageCarousel({ images, alt }) {
           <button
             type="button"
             aria-label="Previous image"
-            onClick={() => goTo(index - 1)}
+            onClick={showPrevious}
             className="absolute left-0 z-10 p-1.5 rounded-full bg-white shadow border text-slate-600 hover:text-slate-900"
           >
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -37,7 +48,7 @@ function ImageCarousel({ images, alt }) {
           <button
             type="button"
             aria-label="Next image"
-            onClick={() => goTo(index + 1)}
+            onClick={showNext}
             className="absolute right-0 z-10 p-1.5 rounded-full bg-white shadow border text-slate-600 hover:text-slate-900"
           >
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -54,7 +65,7 @@ function ImageCarousel({ images, alt }) {
               key={i}
               type="button"
               aria-label={`Go to image ${i + 1}`}
-              onClick={() => goTo(i)}
+              onClick={() => setIndex(i)}
               className={`w-2.5 h-2.5 rounded-full transition-colors ${
                 i === index ? 'bg-blue-600' : 'bg-slate-300 hover:bg-slate-400'
               }`}
