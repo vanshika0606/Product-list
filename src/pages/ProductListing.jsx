@@ -14,6 +14,7 @@ function ProductListing() {
   const [categories, setCategories] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
+  const [filtersOpen, setFiltersOpen] = useState(false)
   const [searchParams, setSearchParams] = useSearchParams()
 
   const currentPage = Number(searchParams.get('page')) || 1
@@ -110,8 +111,20 @@ function ProductListing() {
   )
 
   return (
-    <div className="max-w-7xl mx-auto p-6 flex flex-col lg:flex-row gap-6">
+    <div className="max-w-7xl mx-auto p-4 sm:p-6">
+      <button
+        onClick={() => setFiltersOpen(true)}
+        className="mb-4 flex items-center gap-2 px-3 py-2 rounded-md border bg-white text-sm text-slate-700 shadow-sm"
+      >
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <path d="M4 6h16M7 12h10M10 18h4" strokeLinecap="round" />
+        </svg>
+        Filters
+      </button>
+
       <FilterSidebar
+        open={filtersOpen}
+        onClose={() => setFiltersOpen(false)}
         categories={categories}
         brands={brands}
         selectedCategories={selectedCategories}
@@ -123,7 +136,7 @@ function ProductListing() {
         onApplyPriceRange={applyPriceRange}
       />
 
-      <div className="flex-1">
+      <div className="min-w-0">
         {loading && <Loader />}
         {!loading && error && <ErrorMessage message={error} onRetry={loadData} />}
         {!loading && !error && (

@@ -4,11 +4,11 @@ function Pagination({ currentPage, totalPages, onPageChange }) {
   const pages = Array.from({ length: totalPages }, (_, i) => i + 1)
 
   return (
-    <div className="flex items-center justify-center gap-2 mt-8">
+    <div className="flex flex-wrap items-center justify-center gap-2 mt-8">
       <button
         onClick={() => onPageChange(currentPage - 1)}
         disabled={currentPage === 1}
-        className="px-3 py-2 rounded-md border bg-white text-sm disabled:opacity-40 disabled:cursor-not-allowed"
+        className="px-2.5 sm:px-3 py-2 rounded-md border bg-white text-sm disabled:opacity-40 disabled:cursor-not-allowed"
       >
         ← Previous
       </button>
@@ -17,7 +17,7 @@ function Pagination({ currentPage, totalPages, onPageChange }) {
         <button
           key={page}
           onClick={() => onPageChange(page)}
-          className={`w-9 h-9 rounded-md text-sm border ${
+          className={`w-9 h-9 shrink-0 rounded-md text-sm border ${
             page === currentPage
               ? 'bg-blue-600 text-white border-blue-600'
               : 'bg-white text-slate-700'
@@ -30,7 +30,7 @@ function Pagination({ currentPage, totalPages, onPageChange }) {
       <button
         onClick={() => onPageChange(currentPage + 1)}
         disabled={currentPage === totalPages}
-        className="px-3 py-2 rounded-md border bg-white text-sm disabled:opacity-40 disabled:cursor-not-allowed"
+        className="px-2.5 sm:px-3 py-2 rounded-md border bg-white text-sm disabled:opacity-40 disabled:cursor-not-allowed"
       >
         Next →
       </button>

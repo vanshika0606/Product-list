@@ -34,7 +34,7 @@ function ProductDetail() {
   if (!product) return null
 
   return (
-    <div className="max-w-5xl mx-auto p-6">
+    <div className="max-w-5xl mx-auto p-4 sm:p-6">
       <button
         onClick={() => navigate(-1)}
         className="mb-4 px-3 py-1.5 rounded-md border bg-white text-sm text-slate-700"
@@ -42,12 +42,12 @@ function ProductDetail() {
         ← Back
       </button>
 
-      <div className="bg-white rounded-lg shadow-sm p-6 grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div className="bg-white rounded-lg shadow-sm p-4 sm:p-6 grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
         <div className="flex items-center justify-center">
           <img
             src={product.thumbnail}
             alt={product.title}
-            className="max-h-96 object-contain"
+            className="max-h-64 sm:max-h-96 object-contain"
           />
         </div>
 

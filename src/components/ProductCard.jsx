@@ -7,9 +7,9 @@ function ProductCard({ product }) {
   return (
     <button
       onClick={() => navigate(`/product/${product.id}`)}
-      className="bg-white rounded-lg shadow-sm p-4 text-left hover:shadow-md transition-shadow flex flex-col"
+      className="bg-white rounded-lg shadow-sm p-3 sm:p-4 text-left hover:shadow-md transition-shadow flex flex-col"
     >
-      <div className="h-40 flex items-center justify-center mb-4">
+      <div className="h-28 sm:h-40 flex items-center justify-center mb-3 sm:mb-4">
         <img
           src={product.thumbnail}
           alt={product.title}
