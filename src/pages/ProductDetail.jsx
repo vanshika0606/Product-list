@@ -34,15 +34,15 @@ function ProductDetail() {
   if (!product) return null
 
   return (
-    <div className="max-w-5xl mx-auto p-4 sm:p-6">
+    <div className="flex-1 flex flex-col p-4 sm:p-6">
       <button
         onClick={() => navigate(-1)}
-        className="mb-4 px-3 py-1.5 rounded-md border bg-white text-sm text-slate-700"
+        className="mb-4 px-3 py-1.5 rounded-md border bg-white text-sm text-slate-700 self-start"
       >
         ← Back
       </button>
 
-      <div className="bg-white rounded-lg shadow-sm p-4 sm:p-6 grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
+      <div className="bg-white flex-1 rounded-lg shadow-sm p-4 sm:p-6 grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
         <div className="flex items-center justify-center">
           <img
             src={product.thumbnail}
@@ -52,38 +52,38 @@ function ProductDetail() {
         </div>
 
         <div>
-          <h1 className="text-2xl font-semibold text-slate-900">{product.title}</h1>
-          <p className="mt-2 text-xl font-semibold text-slate-900">${product.price}</p>
-          <div className="mt-1">
+          <h1 className="text-3xl sm:text-4xl font-semibold text-slate-900">{product.title}</h1>
+          <p className="mt-3 text-2xl sm:text-3xl font-semibold text-slate-900">${product.price}</p>
+          <div className="mt-2 text-lg">
             <StarRating rating={product.rating} />
           </div>
 
-          <p className="mt-3 text-sm text-slate-600">
+          <p className="mt-4 text-base text-slate-600">
             <span className="font-medium text-slate-800">Brand:</span> {product.brand}
           </p>
-          <p className="text-sm text-slate-600 capitalize">
+          <p className="text-base text-slate-600 capitalize">
             <span className="font-medium text-slate-800">Category:</span>{' '}
             {product.category?.replace(/-/g, ' ')}
           </p>
 
-          <div className="mt-5 pt-4 border-t">
-            <h2 className="font-semibold text-slate-800 mb-2">Description</h2>
-            <p className="text-sm text-slate-600">{product.description}</p>
+          <div className="mt-6 pt-5 border-t">
+            <h2 className="text-xl font-semibold text-slate-800 mb-3">Description</h2>
+            <p className="text-base text-slate-600 leading-relaxed">{product.description}</p>
           </div>
 
           {product.reviews?.length > 0 && (
-            <div className="mt-5 pt-4 border-t">
-              <h2 className="font-semibold text-slate-800 mb-3">Reviews</h2>
-              <div className="space-y-3">
+            <div className="mt-6 pt-5 border-t">
+              <h2 className="text-xl font-semibold text-slate-800 mb-4">Reviews</h2>
+              <div className="space-y-4">
                 {product.reviews.map((review, index) => (
                   <div key={index}>
                     <div className="flex items-center gap-2">
-                      <span className="font-medium text-sm text-slate-800">
+                      <span className="font-medium text-base text-slate-800">
                         {review.reviewerName}
                       </span>
                       <StarRating rating={review.rating} />
                     </div>
-                    <p className="text-sm text-slate-600 mt-1">{review.comment}</p>
+                    <p className="text-base text-slate-600 mt-1">{review.comment}</p>
                   </div>
                 ))}
               </div>

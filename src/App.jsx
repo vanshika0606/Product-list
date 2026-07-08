@@ -5,12 +5,14 @@ import ProductDetail from './pages/ProductDetail.jsx'
 
 function App() {
   return (
-    <div className="min-h-screen bg-slate-100">
+    <div className="min-h-screen bg-slate-100 flex flex-col">
       <Navbar />
-      <Routes>
-        <Route path="/" element={<ProductListing />} />
-        <Route path="/product/:id" element={<ProductDetail />} />
-      </Routes>
+      <main className="flex-1 flex flex-col">
+        <Routes>
+          <Route path="/" element={<ProductListing />} />
+          <Route path="/product/:id" element={<ProductDetail />} />
+        </Routes>
+      </main>
     </div>
   )
 }

@@ -111,7 +111,7 @@ function ProductListing() {
   )
 
   return (
-    <div className="mx-auto p-4 sm:p-6 flex flex-col lg:flex-row gap-6">
+    <div className="p-4 sm:p-6 flex flex-col lg:flex-row gap-6">
       <button
         onClick={() => setFiltersOpen(true)}
         className="lg:hidden flex items-center gap-2 px-3 py-2 rounded-md border bg-white text-sm text-slate-700 shadow-sm self-start"
