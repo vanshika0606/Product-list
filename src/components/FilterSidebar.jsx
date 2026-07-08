@@ -20,6 +20,14 @@ function FilterSidebar({
 
   return (
     <aside className="w-full lg:w-64 shrink-0 bg-white rounded-lg shadow-sm p-4 space-y-6">
+      <h2 className="flex items-center gap-2 font-semibold text-slate-800 text-lg pb-2 border-b">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <circle cx="11" cy="11" r="7" />
+          <path d="M21 21l-4.35-4.35" strokeLinecap="round" />
+        </svg>
+        Filters
+      </h2>
+
       <div>
         <h3 className="font-semibold text-slate-800 mb-3">Categories</h3>
         <div className="space-y-2 max-h-56 overflow-y-auto">
