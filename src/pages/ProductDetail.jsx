@@ -37,7 +37,7 @@ function ProductDetail() {
     <div className="flex-1 flex flex-col p-4 sm:p-6">
       <button
         onClick={() => navigate(-1)}
-        className="mb-4 px-3 py-1.5 rounded-md border bg-white text-sm text-slate-700 self-start"
+        className="mb-4 px-3 py-1.5 rounded-md border bg-white text-md text-slate-700 self-start"
       >
         ← Back
       </button>
@@ -47,7 +47,7 @@ function ProductDetail() {
           <img
             src={product.thumbnail}
             alt={product.title}
-            className="max-h-64 sm:max-h-96 object-contain"
+            className="max-h-[20rem] sm:max-h-[30rem] w-full object-contain"
           />
         </div>
 
