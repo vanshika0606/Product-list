@@ -24,14 +24,14 @@ function FilterSidebar({
     <>
       <div
         onClick={onClose}
-        className={`fixed inset-0 z-40 bg-black/30 transition-opacity ${
+        className={`fixed inset-0 z-40 bg-black/30 transition-opacity lg:hidden ${
           open ? 'opacity-100' : 'opacity-0 pointer-events-none'
         }`}
       />
       <aside
-        className={`fixed z-50 top-0 left-0 h-full w-72 max-w-[85vw] overflow-y-auto bg-white shadow-lg p-4 space-y-6 transition-transform duration-200 ease-in-out ${
+        className={`fixed lg:static z-50 lg:z-auto top-0 left-0 h-full lg:h-auto w-72 max-w-[85vw] lg:w-64 lg:max-w-none shrink-0 overflow-y-auto bg-white shadow-lg lg:shadow-sm rounded-none lg:rounded-lg p-4 space-y-6 transition-transform duration-200 ease-in-out lg:transition-none ${
           open ? 'translate-x-0' : '-translate-x-full'
-        }`}
+        } lg:translate-x-0`}
       >
         <div className="flex items-center justify-between pb-2 border-b">
           <h2 className="flex items-center gap-2 font-semibold text-slate-800 text-lg">
@@ -44,7 +44,7 @@ function FilterSidebar({
           <button
             aria-label="Close filters"
             onClick={onClose}
-            className="p-1 text-slate-500 hover:text-slate-800"
+            className="p-1 text-slate-500 hover:text-slate-800 lg:hidden"
           >
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M6 6l12 12M18 6L6 18" strokeLinecap="round" />
