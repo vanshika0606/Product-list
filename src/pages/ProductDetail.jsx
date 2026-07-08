@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { fetchProductById } from '../api/products.js'
 import StarRating from '../components/StarRating.jsx'
+import ImageCarousel from '../components/ImageCarousel.jsx'
 import Loader from '../components/Loader.jsx'
 import ErrorMessage from '../components/ErrorMessage.jsx'
 
@@ -44,10 +45,9 @@ function ProductDetail() {
 
       <div className="bg-white flex-1 rounded-lg shadow-sm p-4 sm:p-6 grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
         <div className="flex items-center justify-center">
-          <img
-            src={product.thumbnail}
+          <ImageCarousel
+            images={product.images?.length ? product.images : [product.thumbnail]}
             alt={product.title}
-            className="max-h-[20rem] sm:max-h-[30rem] w-full object-contain"
           />
         </div>
 
