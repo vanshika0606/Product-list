@@ -1,12 +1,18 @@
 import { useEffect, useRef, useState } from 'react'
-import { useNavigate, useSearchParams } from 'react-router-dom'
+import { useLocation, useNavigate, useSearchParams } from 'react-router-dom'
 import { SEARCH_DEBOUNCE_MS } from '../utilities/constants.js'
 
 function Navbar() {
   const navigate = useNavigate()
+  const location = useLocation()
   const [searchParams] = useSearchParams()
   const [searchText, setSearchText] = useState(searchParams.get('q') || '')
   const isFirstRender = useRef(true)
+  const pathnameRef = useRef(location.pathname)
+
+  useEffect(() => {
+    pathnameRef.current = location.pathname
+  }, [location.pathname])
 
   useEffect(() => {
     if (isFirstRender.current) {
@@ -14,6 +20,10 @@ function Navbar() {
       return
     }
     const timeout = setTimeout(() => {
+      // Navbar stays mounted across route changes, so a debounce started while
+      // searching can otherwise fire after the user has already navigated away
+      // (e.g. to a product's detail page) and yank them back to the listing.
+      if (pathnameRef.current !== '/') return
       const trimmed = searchText.trim()
       const search = trimmed ? `?q=${encodeURIComponent(trimmed)}` : ''
       navigate({ pathname: '/', search }, { replace: true })
