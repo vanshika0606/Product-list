@@ -3,7 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { fetchProductById } from '../api/products.js'
 import StarRating from '../components/StarRating.jsx'
 import ImageCarousel from '../components/ImageCarousel.jsx'
-import Loader from '../components/Loader.jsx'
+import SkeletonDetail from '../components/SkeletonDetail.jsx'
 import ErrorMessage from '../components/ErrorMessage.jsx'
 
 function ProductDetail() {
@@ -30,7 +30,7 @@ function ProductDetail() {
     }
   }
 
-  if (loading) return <Loader />
+  if (loading) return <SkeletonDetail />
   if (error) return <ErrorMessage message={error} onRetry={loadProduct} />
   if (!product) return null
 

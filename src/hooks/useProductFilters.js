@@ -1,7 +1,7 @@
 import { useCallback, useMemo } from 'react'
 import { useSearchParams } from 'react-router-dom'
 
-const PAGE_SIZE = 8
+export const PAGE_SIZE = 8
 
 function parseListParam(param) {
   return param?.split(',').filter(Boolean) || []

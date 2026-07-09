@@ -1,10 +1,10 @@
 import { useState } from 'react'
 import { useProducts } from '../hooks/useProducts.js'
-import { useProductFilters } from '../hooks/useProductFilters.js'
+import { useProductFilters, PAGE_SIZE } from '../hooks/useProductFilters.js'
 import ProductGrid from '../components/ProductGrid.jsx'
 import Pagination from '../components/Pagination.jsx'
 import FilterSidebar from '../components/FilterSidebar.jsx'
-import Loader from '../components/Loader.jsx'
+import SkeletonGrid from '../components/SkeletonGrid.jsx'
 import ErrorMessage from '../components/ErrorMessage.jsx'
 
 function ProductListing() {
@@ -52,7 +52,7 @@ function ProductListing() {
       />
 
       <div className="flex-1 min-w-0">
-        {loading && <Loader />}
+        {loading && <SkeletonGrid count={PAGE_SIZE} />}
         {!loading && error && <ErrorMessage message={error} onRetry={reload} />}
         {!loading && !error && (
           <>
