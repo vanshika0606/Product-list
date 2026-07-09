@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
-
-const SEARCH_DEBOUNCE_MS = 400
+import { SEARCH_DEBOUNCE_MS } from '../utilities/constants.js'
 
 function Navbar() {
   const navigate = useNavigate()

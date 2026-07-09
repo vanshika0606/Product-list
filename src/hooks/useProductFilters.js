@@ -1,36 +1,9 @@
 import { useCallback, useMemo } from 'react'
 import { useSearchParams } from 'react-router-dom'
+import { PAGE_SIZE } from '../utilities/constants.js'
+import { matchesFilters, paginate, parseListParam, toggleListValue } from '../utilities/filterLogic.js'
 
-export const PAGE_SIZE = 8
-
-function parseListParam(param) {
-  return param?.split(',').filter(Boolean) || []
-}
-
-function toggleListValue(list, value) {
-  return list.includes(value) ? list.filter((item) => item !== value) : [...list, value]
-}
-
-function matchesFilters(product, { categorySet, brandSet, min, max }) {
-  if (categorySet.size && !categorySet.has(product.category)) {
-    return false
-  }
-  if (brandSet.size && !brandSet.has(product.brand)) {
-    return false
-  }
-  if (min !== null && product.price < min) {
-    return false
-  }
-  if (max !== null && product.price > max) {
-    return false
-  }
-  return true
-}
-
-function paginate(items, page, pageSize) {
-  const start = (page - 1) * pageSize
-  return items.slice(start, start + pageSize)
-}
+export { PAGE_SIZE }
 
 export function useProductFilters(products) {
   const [searchParams, setSearchParams] = useSearchParams()
