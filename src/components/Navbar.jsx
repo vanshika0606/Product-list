@@ -1,4 +1,27 @@
+import { useEffect, useRef, useState } from 'react'
+import { useNavigate, useSearchParams } from 'react-router-dom'
+
+const SEARCH_DEBOUNCE_MS = 400
+
 function Navbar() {
+  const navigate = useNavigate()
+  const [searchParams] = useSearchParams()
+  const [searchText, setSearchText] = useState(searchParams.get('q') || '')
+  const isFirstRender = useRef(true)
+
+  useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false
+      return
+    }
+    const timeout = setTimeout(() => {
+      const trimmed = searchText.trim()
+      const search = trimmed ? `?q=${encodeURIComponent(trimmed)}` : ''
+      navigate({ pathname: '/', search }, { replace: true })
+    }, SEARCH_DEBOUNCE_MS)
+    return () => clearTimeout(timeout)
+  }, [searchText, navigate])
+
   return (
     <header className="bg-slate-800 text-white">
       <div className="flex items-center gap-2 sm:gap-4 px-3 sm:px-6 py-3">
@@ -16,6 +39,8 @@ function Navbar() {
             </svg>
             <input
               type="text"
+              value={searchText}
+              onChange={(e) => setSearchText(e.target.value)}
               placeholder="Search products..."
               className="w-full min-w-0 bg-transparent outline-none text-sm text-slate-700 placeholder:text-slate-400"
             />

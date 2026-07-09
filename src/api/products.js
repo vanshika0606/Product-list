@@ -25,8 +25,22 @@ export function getErrorMessage(error, fallback = 'Something went wrong. Please 
   return fallback
 }
 
-export async function fetchAllProducts() {
-  const response = await fetch(`${BASE_URL}/products?limit=0`)
+const LISTING_FIELDS = 'id,title,price,rating,thumbnail,category,brand'
+
+export async function fetchAllProducts(signal) {
+  const response = await fetch(`${BASE_URL}/products?limit=0&select=${LISTING_FIELDS}`, { signal })
+  const data = await handleResponse(response)
+  return data.products
+}
+
+export async function fetchSearchProducts(query, signal) {
+  if (!query) {
+    return []
+  }
+  const response = await fetch(
+    `${BASE_URL}/products/search?q=${encodeURIComponent(query)}&limit=0&select=${LISTING_FIELDS}`,
+    { signal },
+  )
   const data = await handleResponse(response)
   return data.products
 }

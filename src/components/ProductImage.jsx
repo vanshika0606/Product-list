@@ -34,6 +34,7 @@ function ProductImage({ src, alt, className = '' }) {
         src={errored ? FALLBACK_IMAGE : src}
         alt={alt}
         decoding="async"
+        loading='lazy'
         onLoad={() => {
           setLoaded(true)
         }}
