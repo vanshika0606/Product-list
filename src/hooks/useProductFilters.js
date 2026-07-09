@@ -100,6 +100,11 @@ export function useProductFilters(products) {
     [updateParams],
   )
 
+  const clearFilters = useCallback(
+    () => updateParams({ category: '', brand: '', minPrice: '', maxPrice: '' }),
+    [updateParams],
+  )
+
   return {
     brands,
     selectedCategories,
@@ -113,6 +118,7 @@ export function useProductFilters(products) {
     toggleCategory,
     toggleBrand,
     applyPriceRange,
+    clearFilters,
     goToPage,
   }
 }

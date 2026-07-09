@@ -6,6 +6,7 @@ import Pagination from '../components/Pagination.jsx'
 import FilterSidebar from '../components/FilterSidebar.jsx'
 import SkeletonGrid from '../components/SkeletonGrid.jsx'
 import ErrorMessage from '../components/ErrorMessage.jsx'
+import EmptyState from '../components/EmptyState.jsx'
 
 function ProductListing() {
   const [filtersOpen, setFiltersOpen] = useState(false)
@@ -19,9 +20,11 @@ function ProductListing() {
     currentPage,
     totalPages,
     pageProducts,
+    filteredCount,
     toggleCategory,
     toggleBrand,
     applyPriceRange,
+    clearFilters,
     goToPage,
   } = useProductFilters(products)
 
@@ -54,7 +57,10 @@ function ProductListing() {
       <div className="flex-1 min-w-0">
         {loading && <SkeletonGrid count={PAGE_SIZE} />}
         {!loading && error && <ErrorMessage message={error} onRetry={reload} />}
-        {!loading && !error && (
+        {!loading && !error && filteredCount === 0 && (
+          <EmptyState onClearFilters={clearFilters} />
+        )}
+        {!loading && !error && filteredCount > 0 && (
           <>
             <ProductGrid products={pageProducts} />
             <Pagination

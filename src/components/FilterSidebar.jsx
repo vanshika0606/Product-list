@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 function FilterSidebar({
   open,
@@ -15,6 +15,11 @@ function FilterSidebar({
 }) {
   const [minInput, setMinInput] = useState(minPrice ?? '')
   const [maxInput, setMaxInput] = useState(maxPrice ?? '')
+
+  useEffect(() => {
+    setMinInput(minPrice ?? '')
+    setMaxInput(maxPrice ?? '')
+  }, [minPrice, maxPrice])
 
   function handleApply() {
     onApplyPriceRange(minInput, maxInput)
