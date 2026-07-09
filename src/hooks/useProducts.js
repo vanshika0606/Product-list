@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react'
-import { fetchAllProducts, fetchCategories } from '../api/products.js'
+import { fetchAllProducts, fetchCategories, getErrorMessage } from '../api/products.js'
 
 export function useProducts() {
   const [products, setProducts] = useState([])
@@ -18,7 +18,7 @@ export function useProducts() {
       setProducts(productsData)
       setCategories(categoriesData)
     } catch (err) {
-      setError('Failed to load products. Please try again.')
+      setError(getErrorMessage(err, 'Failed to load products. Please try again.'))
     } finally {
       setLoading(false)
     }

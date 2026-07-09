@@ -2,9 +2,27 @@ const BASE_URL = 'https://dummyjson.com'
 
 async function handleResponse(response) {
   if (!response.ok) {
-    throw new Error(`Request failed with status ${response.status}`)
+    const error = new Error(`Request failed with status ${response.status}`)
+    error.status = response.status
+    throw error
   }
   return response.json()
+}
+
+export function getErrorMessage(error, fallback = 'Something went wrong. Please try again.') {
+  if (typeof navigator !== 'undefined' && navigator.onLine === false) {
+    return 'You appear to be offline. Check your connection and try again.'
+  }
+  if (error instanceof TypeError) {
+    return 'Unable to reach the server. Check your connection and try again.'
+  }
+  if (error?.status === 404) {
+    return "We couldn't find what you were looking for."
+  }
+  if (error?.status >= 500) {
+    return 'The server ran into a problem. Please try again shortly.'
+  }
+  return fallback
 }
 
 export async function fetchAllProducts() {

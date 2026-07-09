@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import { fetchProductById } from '../api/products.js'
+import { fetchProductById, getErrorMessage } from '../api/products.js'
 import StarRating from '../components/StarRating.jsx'
 import ImageCarousel from '../components/ImageCarousel.jsx'
 import SkeletonDetail from '../components/SkeletonDetail.jsx'
@@ -24,7 +24,7 @@ function ProductDetail() {
       const data = await fetchProductById(id)
       setProduct(data)
     } catch (err) {
-      setError('Failed to load product. Please try again.')
+      setError(getErrorMessage(err, 'Failed to load product. Please try again.'))
     } finally {
       setLoading(false)
     }
