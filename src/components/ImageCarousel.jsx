@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import ProductImage from './ProductImage.jsx'
+import { getNextIndex, getPreviousIndex } from '../utilities/carousel.js'
 
 function ImageCarousel({ images, alt }) {
   const [index, setIndex] = useState(0)
@@ -9,11 +10,11 @@ function ImageCarousel({ images, alt }) {
   const hasMultiple = images.length > 1
 
   function showPrevious() {
-    setIndex((current) => (current - 1 + images.length) % images.length)
+    setIndex((current) => getPreviousIndex(current, images.length))
   }
 
   function showNext() {
-    setIndex((current) => (current + 1) % images.length)
+    setIndex((current) => getNextIndex(current, images.length))
   }
 
   return (

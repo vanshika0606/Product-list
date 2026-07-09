@@ -1,3 +1,5 @@
+import { getStarFillPercent } from '../utilities/rating.js'
+
 function StarRating({ rating = 0 }) {
   const stars = [1, 2, 3, 4, 5]
 
@@ -5,7 +7,7 @@ function StarRating({ rating = 0 }) {
     <span className="inline-flex items-center gap-1 text-sm">
       <span className="inline-flex text-amber-400">
         {stars.map((star) => {
-          const fillPercent = Math.max(0, Math.min(1, rating - (star - 1))) * 100
+          const fillPercent = getStarFillPercent(rating, star)
           return (
             <span key={star} className="relative inline-block w-4 h-4">
               <svg viewBox="0 0 20 20" fill="#e2e8f0" className="absolute inset-0 w-4 h-4">

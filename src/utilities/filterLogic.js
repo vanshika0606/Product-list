@@ -26,3 +26,7 @@ export function paginate(items, page, pageSize) {
   const start = (page - 1) * pageSize
   return items.slice(start, start + pageSize)
 }
+
+export function getTotalPages(itemCount, pageSize) {
+  return Math.ceil(itemCount / pageSize)
+}

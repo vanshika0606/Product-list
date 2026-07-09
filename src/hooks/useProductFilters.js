@@ -1,7 +1,7 @@
 import { useCallback, useMemo } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { PAGE_SIZE } from '../utilities/constants.js'
-import { matchesFilters, paginate, parseListParam, toggleListValue } from '../utilities/filterLogic.js'
+import { getTotalPages, matchesFilters, paginate, parseListParam, toggleListValue } from '../utilities/filterLogic.js'
 
 export { PAGE_SIZE }
 
@@ -30,7 +30,7 @@ export function useProductFilters(products) {
     return products.filter((product) => matchesFilters(product, { categorySet, brandSet, min, max }))
   }, [products, selectedCategories, selectedBrands, minPrice, maxPrice])
 
-  const totalPages = Math.ceil(filteredProducts.length / PAGE_SIZE)
+  const totalPages = getTotalPages(filteredProducts.length, PAGE_SIZE)
   const pageProducts = paginate(filteredProducts, currentPage, PAGE_SIZE)
 
   const updateParams = useCallback(
