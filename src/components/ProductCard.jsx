@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 import StarRating from './StarRating.jsx'
+import ProductImage from './ProductImage.jsx'
 
 function ProductCard({ product }) {
   const navigate = useNavigate()
@@ -9,13 +10,11 @@ function ProductCard({ product }) {
       onClick={() => navigate(`/product/${product.id}`)}
       className="bg-white rounded-lg shadow-sm p-3 sm:p-4 text-left hover:shadow-md transition-shadow flex flex-col"
     >
-      <div className="h-28 sm:h-40 flex items-center justify-center mb-3 sm:mb-4">
-        <img
-          src={product.thumbnail}
-          alt={product.title}
-          className="max-h-full max-w-full object-contain"
-        />
-      </div>
+      <ProductImage
+        src={product.thumbnail}
+        alt={product.title}
+        className="h-28 sm:h-40 w-full mb-3 sm:mb-4"
+      />
       <div className="border-t pt-3">
         <h3 className="font-medium text-slate-800 truncate">{product.title}</h3>
         <p className="mt-1 font-semibold text-slate-900">${product.price}</p>

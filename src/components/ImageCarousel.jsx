@@ -1,14 +1,8 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
+import ProductImage from './ProductImage.jsx'
 
 function ImageCarousel({ images, alt }) {
   const [index, setIndex] = useState(0)
-
-  useEffect(() => {
-    images?.forEach((src) => {
-      const preload = new Image()
-      preload.src = src
-    })
-  }, [images])
 
   if (!images || images.length === 0) return null
 
@@ -38,10 +32,10 @@ function ImageCarousel({ images, alt }) {
           </button>
         )}
 
-        <img
+        <ProductImage
           src={images[index]}
           alt={`${alt} - image ${index + 1}`}
-          className="max-h-80 sm:max-h-[32rem] w-full object-contain"
+          className="h-80 sm:h-[32rem] w-full"
         />
 
         {hasMultiple && (
